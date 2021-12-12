@@ -3,15 +3,9 @@ package com.ikanoshiokara.todoy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.ikanoshiokara.todoy.ui.components.MainTopBar
-import com.ikanoshiokara.todoy.ui.components.top.TopFab
-import com.ikanoshiokara.todoy.ui.pages.TopPage
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,6 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TodoyTheme {
+                Greeting(name = "")
             }
         }
     }

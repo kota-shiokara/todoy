@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ikanoshiokara.todoy.data.model.PreviewTaskProvider
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
@@ -19,8 +20,9 @@ import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 @Composable
 fun TaskCard(task: Task) {
     val paddingVertical = 6.dp // 縦のpadding
-    val bottomAccentHeight = 10.dp
-    val bodyHeight = 50.dp
+    val bodyHeight = 70.dp
+    val bottomAccentHeight = 30.dp
+
     // cardの大きさ
     val cardHeight = bodyHeight +
             bottomAccentHeight +
@@ -43,7 +45,7 @@ fun TaskCard(task: Task) {
                     .height(bodyHeight)
                     .fillMaxSize()
             ) {
-                Text(task.title)
+                Text(task.title, fontSize = 35.sp)
             }
             Surface(
                 color = MaterialTheme.colors.primary,
