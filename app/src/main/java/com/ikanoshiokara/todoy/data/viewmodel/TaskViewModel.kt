@@ -1,11 +1,11 @@
 package com.ikanoshiokara.todoy.data.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.lifecycle.*
 import com.ikanoshiokara.todoy.data.model.Task
+import com.ikanoshiokara.todoy.data.model.TaskDao
+import com.ikanoshiokara.todoy.data.model.TaskDatabase
 import com.ikanoshiokara.todoy.data.repository.TaskRepository
 import kotlinx.coroutines.launch
 
@@ -46,4 +46,21 @@ class TaskViewModel(
             taskRepository.deleteTask(task.id)
         }
     }
+
+    class Factory(private val repository: TaskRepository): ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
+            return TaskViewModel(this.repository) as T
+        }
+    }
+}
+
+class PreviewTaskViewModelProvider: PreviewParameterProvider<TaskViewModel> {
+    override val values: Sequence<TaskViewModel>
+        get() {
+            val context: Context? = null
+            return sequenceOf(
+
+            )
+        }
 }

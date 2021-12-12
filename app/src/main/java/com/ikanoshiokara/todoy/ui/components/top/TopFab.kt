@@ -7,12 +7,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
-@Preview(showBackground = true)
 @Composable
-fun TopFab() {
+fun TopFab(navController: NavController) {
     FloatingActionButton(onClick = {
         // TODO
+        navController.navigate("add")
         Log.d("Todoy", "FAB Click")
     }) {
         Icon(Icons.Filled.Add, "Add")

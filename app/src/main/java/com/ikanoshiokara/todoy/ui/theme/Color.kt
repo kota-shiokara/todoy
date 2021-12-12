@@ -10,3 +10,7 @@ val Teal200 = Color(0xFF03DAC5)
 val Primary200 = Color(0xFFFFCC80)
 val Primary500 = Color(0xFFFF9800)
 val Primary700 = Color(0xFFF57C00)
+
+val PrimaryNotActive200 = Color(0xFFBE985E)
+val PrimaryNotActive500 = Color(0xFFAD6801)
+val PrimaryNotActive700 = Color(0xFF9B4F01)
