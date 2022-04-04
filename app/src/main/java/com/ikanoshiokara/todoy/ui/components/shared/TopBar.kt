@@ -10,10 +10,12 @@ import com.ikanoshiokara.todoy.R
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun MainTopBar() {
+fun MainTopBar(
+    title: String = stringResource(id = R.string.app_name)
+) {
     TopAppBar(
         title = {
-            Text(stringResource(id = R.string.app_name))
+            Text(title)
         },
         backgroundColor = MaterialTheme.colors.primary
     )

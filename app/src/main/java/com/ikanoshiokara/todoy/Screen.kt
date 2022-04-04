@@ -10,8 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.ui.components.MainTopBar
-import com.ikanoshiokara.todoy.ui.components.top.TopFab
 import com.ikanoshiokara.todoy.ui.pages.AddScreen
+import com.ikanoshiokara.todoy.ui.pages.NavItem
 import com.ikanoshiokara.todoy.ui.pages.TopScreen
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
@@ -27,10 +27,10 @@ fun Screen(modifier: Modifier) {
             topBar = { MainTopBar() }
         ){
             NavHost(navController = navController, startDestination = "main"){
-                composable("main"){
+                composable(NavItem.MainPage.name){
                     TopScreen(navController = navController, tasks = tasks)
                 }
-                composable("add"){
+                composable(NavItem.AddTaskPage.name){
                     AddScreen(navController = navController, tasks = tasks)
                 }
             }
