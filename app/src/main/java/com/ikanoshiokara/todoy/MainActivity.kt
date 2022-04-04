@@ -16,7 +16,7 @@ import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.ui.components.MainTopBar
 import com.ikanoshiokara.todoy.ui.pages.AddScreen
 import com.ikanoshiokara.todoy.ui.pages.NavItem
-import com.ikanoshiokara.todoy.ui.pages.TopScreen
+import com.ikanoshiokara.todoy.ui.pages.MainPage
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 ){
                     NavHost(navController = navController, startDestination = "main"){
                         composable(NavItem.MainPage.name){
-                            TopScreen(navController = navController, tasks = tasks)
+                            MainPage(navController = navController, tasks = tasks)
                         }
                         composable(NavItem.AddTaskPage.name){
                             AddScreen(navController = navController, tasks = tasks)

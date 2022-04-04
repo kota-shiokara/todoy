@@ -12,7 +12,7 @@ import com.ikanoshiokara.todoy.ui.components.top.TaskCard
 import com.ikanoshiokara.todoy.ui.components.top.TopFab
 
 @Composable
-fun TopScreen(navController: NavController, tasks: List<Task>) {
+fun MainPage(navController: NavController, tasks: List<Task>) {
 
     Scaffold(
         floatingActionButton = { TopFab(navController) }

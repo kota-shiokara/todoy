@@ -40,7 +40,7 @@ fun AddScreen(navController: NavController, tasks: MutableList<Task>) {
             modifier = Modifier.padding(10.dp),
             onClick = {
                 tasks.add(Task(0, title, description))
-                navController.navigate("main")
+                navController.navigate(NavItem.MainPage.name)
             }
         ) {
             Text("Submit")
