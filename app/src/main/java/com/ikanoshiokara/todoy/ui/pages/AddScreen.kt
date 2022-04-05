@@ -15,15 +15,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.ikanoshiokara.todoy.LocalNavController
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.R
 import com.ikanoshiokara.todoy.ui.components.MainTopBar
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun AddScreen(navController: NavController, tasks: MutableList<Task>) {
+fun AddScreen(tasks: MutableList<Task>) {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    val navController = LocalNavController.current
 
     Scaffold(
         topBar = { MainTopBar() }
