@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = { MainTopBar() }
                 ){
-                    NavHost(navController = navController, startDestination = "main"){
+                    NavHost(navController = navController, startDestination = NavItem.MainPage.name){
                         composable(NavItem.MainPage.name){
                             MainPage(navController = navController, tasks = tasks)
                         }

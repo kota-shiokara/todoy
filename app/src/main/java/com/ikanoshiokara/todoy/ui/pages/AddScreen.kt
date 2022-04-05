@@ -10,10 +10,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ikanoshiokara.todoy.data.model.Task
+import com.ikanoshiokara.todoy.R
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
@@ -29,12 +31,12 @@ fun AddScreen(navController: NavController, tasks: MutableList<Task>) {
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
-            label = { Text("Title") }
+            label = { Text(stringResource(id = R.string.add_page_input_title)) }
         )
         OutlinedTextField(
             value = description,
             onValueChange = { description = it },
-            label = { Text("description") }
+            label = { Text(stringResource(id = R.string.add_page_input_description)) }
         )
         Button(
             modifier = Modifier.padding(10.dp),
@@ -43,7 +45,7 @@ fun AddScreen(navController: NavController, tasks: MutableList<Task>) {
                 navController.navigate(NavItem.MainPage.name)
             }
         ) {
-            Text("Submit")
+            Text(stringResource(id = R.string.add_page_input_submit_button))
         }
     }
 
