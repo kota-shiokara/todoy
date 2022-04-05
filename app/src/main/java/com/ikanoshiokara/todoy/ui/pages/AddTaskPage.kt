@@ -22,7 +22,7 @@ import com.ikanoshiokara.todoy.ui.components.MainTopBar
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun AddScreen(tasks: MutableList<Task>) {
+fun AddTaskPage(tasks: MutableList<Task>) {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     val navController = LocalNavController.current

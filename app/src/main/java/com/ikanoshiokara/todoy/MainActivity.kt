@@ -17,7 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.ui.components.MainTopBar
-import com.ikanoshiokara.todoy.ui.pages.AddScreen
+import com.ikanoshiokara.todoy.ui.pages.AddTaskPage
 import com.ikanoshiokara.todoy.ui.pages.NavItem
 import com.ikanoshiokara.todoy.ui.pages.MainPage
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                                     MainPage(tasks = tasks)
                                 }
                                 composable(NavItem.AddTaskPage.name){
-                                    AddScreen(tasks = tasks)
+                                    AddTaskPage(tasks = tasks)
                                 }
                             }
                         }
