@@ -3,6 +3,7 @@ package com.ikanoshiokara.todoy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -27,14 +28,19 @@ class MainActivity : ComponentActivity() {
                 var tasks by remember { mutableStateOf(mutableListOf<Task>()) }
                 val navController = rememberNavController()
                 Scaffold(
-                    topBar = { MainTopBar() }
-                ){
-                    NavHost(navController = navController, startDestination = NavItem.MainPage.name){
-                        composable(NavItem.MainPage.name){
-                            MainPage(navController = navController, tasks = tasks)
-                        }
-                        composable(NavItem.AddTaskPage.name){
-                            AddScreen(navController = navController, tasks = tasks)
+                    // TODO: ボトムバーとか...いる？
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        NavHost(navController = navController, startDestination = NavItem.MainPage.name){
+                            composable(NavItem.MainPage.name){
+                                MainPage(navController = navController, tasks = tasks)
+                            }
+                            composable(NavItem.AddTaskPage.name){
+                                AddScreen(navController = navController, tasks = tasks)
+                            }
                         }
                     }
                 }
