@@ -27,9 +27,6 @@ fun MainPage(tasks: List<Task>) {
                     task.isDone = !task.isDone
                 })
             }
-//            items(tasksList) { item ->
-//                TaskCard(task = item)
-//            }
         }
     }
 }
