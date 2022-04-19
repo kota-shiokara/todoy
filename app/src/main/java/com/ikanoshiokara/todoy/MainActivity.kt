@@ -69,6 +69,7 @@ fun MainContent() {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
 
+    // BottomSheet関係
     var bottomSheetItem by remember { mutableStateOf<BottomSheetItem.State>(BottomSheetItem.State.Hidden) }
     val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val bottomSheetItemFunc = remember {
@@ -82,6 +83,7 @@ fun MainContent() {
         }
     }
 
+    // BottomSheetが出てるかどうかで戻るボタンの挙動が変わる
     navController.enableOnBackPressed(!bottomSheetItem.isExpanded())
     BackHandler(
         enabled = bottomSheetItem.isExpanded(),
@@ -90,6 +92,7 @@ fun MainContent() {
         }
     )
 
+    // バケツリレーしなくて済むのいいねというやつ
     CompositionLocalProvider(
         LocalNavController provides navController,
         LocalBottomSheetItem provides bottomSheetItemFunc
