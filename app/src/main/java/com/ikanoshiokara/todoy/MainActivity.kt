@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,6 +42,7 @@ import com.ikanoshiokara.todoy.ui.pages.BottomSheetItem
 import com.ikanoshiokara.todoy.ui.pages.NavItem
 import com.ikanoshiokara.todoy.ui.pages.MainPage
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
+import kotlinx.coroutines.launch
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
     error("No Current NavController")
@@ -64,12 +67,43 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContent() {
     val navController = rememberNavController()
+    val scope = rememberCoroutineScope()
+
+    var bottomSheetItem by remember { mutableStateOf<BottomSheetItem.State>(BottomSheetItem.State.Hidden) }
+    val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val bottomSheetItemFunc = remember {
+        object : BottomSheetItem {
+            override fun invoke(state: BottomSheetItem.State) {
+                bottomSheetItem = state
+                scope.launch {
+                    bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                }
+            }
+        }
+    }
+
+    navController.enableOnBackPressed(!bottomSheetItem.isExpanded())
+    BackHandler(
+        enabled = bottomSheetItem.isExpanded(),
+        onBack = {
+            bottomSheetItemFunc.invoke(BottomSheetItem.State.Hidden)
+        }
+    )
 
     CompositionLocalProvider(
-        LocalNavController provides navController
+        LocalNavController provides navController,
+        LocalBottomSheetItem provides bottomSheetItemFunc
     ) {
-//        ModalBottomSheetLayout(
-//        ) {
+        ModalBottomSheetLayout(
+            sheetState = bottomSheetState,
+            sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+            sheetContent = {
+                BottomSheetContent(
+                    sheetState = bottomSheetState,
+                    sheetItem = bottomSheetItem
+                )
+            }
+        ) {
             var tasks by remember { mutableStateOf(mutableListOf<Task>()) }
             Scaffold(
                 // TODO: ボトムバーとか...いる？
@@ -85,13 +119,10 @@ fun MainContent() {
                         composable(NavItem.MainPage.name) {
                             MainPage(tasks = tasks)
                         }
-                        composable(NavItem.AddTaskPage.name) {
-                            AddTaskPage(tasks = tasks)
-                        }
                     }
                 }
             }
-//        }
+        }
     }
 }
 

@@ -19,7 +19,7 @@ fun MainPage(tasks: List<Task>) {
 
     Scaffold(
         topBar = { MainTopBar() },
-        floatingActionButton = { TopFab(navController) }
+        floatingActionButton = { TopFab() }
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(tasks) { task ->
