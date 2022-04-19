@@ -72,7 +72,7 @@ fun MainContent() {
     // BottomSheet関係
     var bottomSheetItem by remember { mutableStateOf<BottomSheetItem.State>(BottomSheetItem.State.Hidden) }
     val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    val bottomSheetItemFunc = remember {
+    val bottomSheetItemSetter = remember {
         object : BottomSheetItem {
             override fun invoke(state: BottomSheetItem.State) {
                 bottomSheetItem = state
@@ -88,14 +88,14 @@ fun MainContent() {
     BackHandler(
         enabled = bottomSheetItem.isExpanded(),
         onBack = {
-            bottomSheetItemFunc.invoke(BottomSheetItem.State.Hidden)
+            bottomSheetItemSetter.invoke(BottomSheetItem.State.Hidden)
         }
     )
 
     // バケツリレーしなくて済むのいいねというやつ
     CompositionLocalProvider(
         LocalNavController provides navController,
-        LocalBottomSheetItem provides bottomSheetItemFunc
+        LocalBottomSheetItem provides bottomSheetItemSetter
     ) {
         ModalBottomSheetLayout(
             sheetState = bottomSheetState,
