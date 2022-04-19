@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">todoy</string>
+
+    <!-- Add Page -->
+    <string name="add_page_input_title">Title</string>
+    <string name="add_page_input_description">Description</string>
+    <string name="add_page_input_submit_button">Submit</string>
 </resources>

@@ -7,15 +7,19 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.ikanoshiokara.todoy.LocalNavController
 import com.ikanoshiokara.todoy.data.model.Task
+import com.ikanoshiokara.todoy.ui.components.MainTopBar
 import com.ikanoshiokara.todoy.ui.components.top.TaskCard
 import com.ikanoshiokara.todoy.ui.components.top.TopFab
 
 @Composable
-fun TopScreen(navController: NavController, tasks: List<Task>) {
+fun MainPage(tasks: List<Task>) {
+    val navController = LocalNavController.current
 
     Scaffold(
-        floatingActionButton = { TopFab(navController) }
+        topBar = { MainTopBar() },
+        floatingActionButton = { TopFab() }
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(tasks) { task ->
@@ -23,9 +27,6 @@ fun TopScreen(navController: NavController, tasks: List<Task>) {
                     task.isDone = !task.isDone
                 })
             }
-//            items(tasksList) { item ->
-//                TaskCard(task = item)
-//            }
         }
     }
 }
