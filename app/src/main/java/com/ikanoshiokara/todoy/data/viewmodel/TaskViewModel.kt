@@ -7,8 +7,10 @@ import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.data.model.TaskDao
 import com.ikanoshiokara.todoy.data.model.TaskDatabase
 import com.ikanoshiokara.todoy.data.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class TaskViewModel(
     private val taskRepository: TaskRepository
 ): ViewModel() {

@@ -42,6 +42,7 @@ import com.ikanoshiokara.todoy.ui.pages.BottomSheetItem
 import com.ikanoshiokara.todoy.ui.pages.NavItem
 import com.ikanoshiokara.todoy.ui.pages.MainPage
 import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
@@ -52,6 +53,7 @@ val LocalBottomSheetItem = compositionLocalOf<BottomSheetItem> {
     error("No Current Bottom Sheet State")
 }
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
