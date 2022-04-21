@@ -8,32 +8,45 @@ import com.ikanoshiokara.todoy.data.model.TaskDao
 import com.ikanoshiokara.todoy.data.model.TaskDatabase
 import com.ikanoshiokara.todoy.data.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class TaskViewModel(
+class MainPageViewModel @Inject constructor(
     private val taskRepository: TaskRepository
 ): ViewModel() {
     private val _items: MutableLiveData<List<Task>> = MutableLiveData()
     val items: LiveData<List<Task>> get() = _items
 
+    private val _state = MutableStateFlow<MainPageState>(MainPageState.Loading)
+    val state = _state.asStateFlow()
+
+    init {
+        getTasks()
+    }
+
     fun getTasks() {
         viewModelScope.launch {
-            _items.postValue(taskRepository.getTaskAll())
+            try {
+                val tasks = taskRepository.getTaskAll()
+                _state.value = MainPageState.Success(tasks)
+            } catch (e: Throwable) {
+                _state.value = MainPageState.Error(e)
+            }
+//            _items.postValue(taskRepository.getTaskAll())
         }
     }
 
     fun addTask(item: Task) {
         viewModelScope.launch {
-            taskRepository.insertTask(item)
-            getTasks()
-        }
-    }
-
-    fun updataTask(item: Task) {
-        viewModelScope.launch {
-            taskRepository.updateTask(item)
-            getTasks()
+            try {
+                taskRepository.insertTask(item)
+                getTasks()
+            } catch (e: Throwable) {
+                _state.value = MainPageState.Error(e)
+            }
         }
     }
 
@@ -52,13 +65,19 @@ class TaskViewModel(
     class Factory(private val repository: TaskRepository): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
-            return TaskViewModel(this.repository) as T
+            return MainPageViewModel(this.repository) as T
         }
     }
 }
 
-class PreviewTaskViewModelProvider: PreviewParameterProvider<TaskViewModel> {
-    override val values: Sequence<TaskViewModel>
+sealed class MainPageState {
+    object Loading: MainPageState()
+    data class Success(val content: List<Task>): MainPageState()
+    data class Error(val exception: Throwable): MainPageState()
+}
+
+class PreviewTaskViewModelProvider: PreviewParameterProvider<MainPageViewModel> {
+    override val values: Sequence<MainPageViewModel>
         get() {
             val context: Context? = null
             return sequenceOf(

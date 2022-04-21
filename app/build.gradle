@@ -88,6 +88,7 @@ dependencies {
     def androidHiltVersion = "1.0.0"
     implementation "com.google.dagger:hilt-android:${daggerHiltVersion}"
     kapt "com.google.dagger:hilt-android-compiler:${daggerHiltVersion}"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${androidHiltVersion}"
+    implementation "androidx.hilt:hilt-navigation-compose:${androidHiltVersion}"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${androidHiltVersion}-alpha03"
     kapt "androidx.hilt:hilt-compiler:${androidHiltVersion}"
 }
