@@ -1,4 +1,4 @@
-package com.ikanoshiokara.todoy.ui.pages
+package com.ikanoshiokara.todoy.components.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,20 +12,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.ikanoshiokara.todoy.LocalBottomSheetItem
-import com.ikanoshiokara.todoy.LocalNavController
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.R
-import com.ikanoshiokara.todoy.ui.components.MainTopBar
-import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun AddTaskPage() {
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+fun AddTaskPage(
+    addTask: (Task) -> Unit
+) {
+    var title by remember { mutableStateOf(TextFieldValue()) }
+    var description by remember { mutableStateOf(TextFieldValue()) }
     val sheetItem = LocalBottomSheetItem.current
 
     Scaffold {
@@ -47,6 +45,7 @@ fun AddTaskPage() {
             Button(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
+                    addTask(Task.newTask(title = title.text, description = description.text))
                     sheetItem(BottomSheetItem.State.Hidden)
                 }
             ) {

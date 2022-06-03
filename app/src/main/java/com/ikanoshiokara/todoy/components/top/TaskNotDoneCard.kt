@@ -1,7 +1,7 @@
-package com.ikanoshiokara.todoy.ui.components.top
+package com.ikanoshiokara.todoy.components.top
 
+import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -17,25 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ikanoshiokara.todoy.data.model.PreviewTaskProvider
 import com.ikanoshiokara.todoy.data.model.Task
-import com.ikanoshiokara.todoy.ui.theme.PrimaryNotActive200
-import com.ikanoshiokara.todoy.ui.theme.PrimaryNotActive500
-import com.ikanoshiokara.todoy.ui.theme.PrimaryNotActive700
-import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
-
+import com.ikanoshiokara.todoy.components.theme.TodoyTheme
 
 @Composable
-fun TaskDoneCard(task: Task, onClick: () -> Unit) {
+fun TaskNotDoneCard(task: Task, onClick: () -> Unit) {
     val paddingVertical = 6.dp // 縦のpadding
     val bodyHeight = 85.dp
     val bottomAccentHeight = 15.dp
-
-    val darkTheme = isSystemInDarkTheme()
-    val notActivePrimary = if(darkTheme) {
-        PrimaryNotActive200
-    } else {
-        PrimaryNotActive500
-    }
-    val notActivePrimaryVariantColor = PrimaryNotActive700
 
     // cardの大きさ
     val cardHeight = bodyHeight +
@@ -55,7 +43,7 @@ fun TaskDoneCard(task: Task, onClick: () -> Unit) {
                 .fillMaxSize()
         ) {
             Surface(
-                color = notActivePrimaryVariantColor,
+                color = MaterialTheme.colors.primaryVariant,
                 modifier = Modifier
                     .height(bodyHeight)
                     .fillMaxSize()
@@ -69,7 +57,7 @@ fun TaskDoneCard(task: Task, onClick: () -> Unit) {
                 }
             }
             Surface(
-                color = notActivePrimary,
+                color = MaterialTheme.colors.primary,
                 modifier = Modifier
                     .height(bottomAccentHeight)
                     .fillMaxSize()
@@ -79,12 +67,12 @@ fun TaskDoneCard(task: Task, onClick: () -> Unit) {
 
 }
 
-@Preview(name = "a", showBackground = true)
+@Preview(name = "Card", showBackground = true)
 @Composable
-fun TaskDoneCardPreview(
+fun TaskNotDoneCardPreview(
     @PreviewParameter(PreviewTaskProvider::class) task: Task
 ) {
     TodoyTheme {
-        TaskDoneCard(task = task, {})
+        TaskNotDoneCard(task = task, { Log.d("a", "a")})
     }
 }
