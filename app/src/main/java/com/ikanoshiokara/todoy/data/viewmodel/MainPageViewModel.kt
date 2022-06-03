@@ -1,6 +1,7 @@
 package com.ikanoshiokara.todoy.data.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.lifecycle.*
 import com.ikanoshiokara.todoy.data.model.Task
@@ -12,14 +13,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.Exception
 
 @HiltViewModel
 class MainPageViewModel @Inject constructor(
     private val taskRepository: TaskRepository
 ): ViewModel() {
-    private val _items: MutableLiveData<List<Task>> = MutableLiveData()
-    val items: LiveData<List<Task>> get() = _items
-
     private val _state = MutableStateFlow<MainPageState>(MainPageState.Loading)
     val state = _state.asStateFlow()
 
@@ -32,7 +31,7 @@ class MainPageViewModel @Inject constructor(
             try {
                 val tasks = taskRepository.getTaskAll()
                 _state.value = MainPageState.Success(tasks)
-            } catch (e: Throwable) {
+            } catch (e: Exception) {
                 _state.value = MainPageState.Error(e)
             }
 //            _items.postValue(taskRepository.getTaskAll())
@@ -43,10 +42,10 @@ class MainPageViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 taskRepository.insertTask(item)
-                getTasks()
-            } catch (e: Throwable) {
+            } catch (e: Exception) {
                 _state.value = MainPageState.Error(e)
             }
+            getTasks()
         }
     }
 
@@ -63,7 +62,7 @@ class MainPageViewModel @Inject constructor(
     }
 
     class Factory(private val repository: TaskRepository): ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return MainPageViewModel(this.repository) as T
         }
@@ -73,7 +72,8 @@ class MainPageViewModel @Inject constructor(
 sealed class MainPageState {
     object Loading: MainPageState()
     data class Success(val content: List<Task>): MainPageState()
-    data class Error(val exception: Throwable): MainPageState()
+    data class Error(val exception: Exception): MainPageState()
+    data class AddTask(val task: Task): MainPageState()
 }
 
 class PreviewTaskViewModelProvider: PreviewParameterProvider<MainPageViewModel> {

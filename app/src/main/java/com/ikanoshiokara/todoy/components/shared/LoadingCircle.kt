@@ -1,4 +1,4 @@
-package com.ikanoshiokara.todoy.ui.components.shared
+package com.ikanoshiokara.todoy.components.shared
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

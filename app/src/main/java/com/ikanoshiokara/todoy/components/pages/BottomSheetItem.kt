@@ -1,21 +1,21 @@
-package com.ikanoshiokara.todoy.ui.pages
+package com.ikanoshiokara.todoy.components.pages
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import com.ikanoshiokara.todoy.data.model.Task
 
 interface BottomSheetItem {
     operator fun invoke(state: State)
 
     sealed class State {
         object Hidden: State()
-        object AddTask: State()
+        data class AddTask(val addTask: (Task) -> Unit): State()
 
         fun isExpanded(): Boolean { // 戻るボタンの時BottomSheetの状態を見る
             return this !is Hidden
@@ -41,7 +41,7 @@ fun BottomSheetContent(
                 }
             }
             is BottomSheetItem.State.AddTask -> {
-                AddTaskPage()
+                AddTaskPage(sheetItem.addTask)
             }
         }
     }

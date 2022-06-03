@@ -1,4 +1,4 @@
-package com.ikanoshiokara.todoy.ui.pages
+package com.ikanoshiokara.todoy.components.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,19 +12,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.ikanoshiokara.todoy.LocalBottomSheetItem
-import com.ikanoshiokara.todoy.LocalNavController
 import com.ikanoshiokara.todoy.data.model.Task
 import com.ikanoshiokara.todoy.R
-import com.ikanoshiokara.todoy.ui.components.MainTopBar
-import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun AddTaskPage() {
-    var title by remember { mutableStateOf("") }
+fun AddTaskPage(
+    addTask: (Task) -> Unit
+) {
+    val title by remember { mutableStateOf(TextFieldValue()) }
     var description by remember { mutableStateOf("") }
     val sheetItem = LocalBottomSheetItem.current
 
@@ -36,7 +34,7 @@ fun AddTaskPage() {
         ) {
             OutlinedTextField(
                 value = title,
-                onValueChange = { title = it },
+                onValueChange = {  },
                 label = { Text(stringResource(id = R.string.add_page_input_title)) }
             )
             OutlinedTextField(
@@ -47,6 +45,7 @@ fun AddTaskPage() {
             Button(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
+                    addTask(Task.newTask(title = title.toString(), description = description))
                     sheetItem(BottomSheetItem.State.Hidden)
                 }
             ) {

@@ -1,4 +1,4 @@
-package com.ikanoshiokara.todoy.ui.components.top
+package com.ikanoshiokara.todoy.components.top
 
 import android.util.Log
 import androidx.compose.runtime.Composable
@@ -6,7 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.ikanoshiokara.todoy.data.model.PreviewTaskProvider
 import com.ikanoshiokara.todoy.data.model.Task
-import com.ikanoshiokara.todoy.ui.theme.TodoyTheme
+import com.ikanoshiokara.todoy.components.theme.TodoyTheme
 
 
 @Composable

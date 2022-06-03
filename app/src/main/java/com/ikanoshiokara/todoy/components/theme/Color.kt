@@ -1,4 +1,4 @@
-package com.ikanoshiokara.todoy.ui.theme
+package com.ikanoshiokara.todoy.components.theme
 
 import androidx.compose.ui.graphics.Color
 
