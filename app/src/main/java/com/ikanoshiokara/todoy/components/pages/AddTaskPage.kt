@@ -22,8 +22,8 @@ import com.ikanoshiokara.todoy.R
 fun AddTaskPage(
     addTask: (Task) -> Unit
 ) {
-    val title by remember { mutableStateOf(TextFieldValue()) }
-    var description by remember { mutableStateOf("") }
+    var title by remember { mutableStateOf(TextFieldValue()) }
+    var description by remember { mutableStateOf(TextFieldValue()) }
     val sheetItem = LocalBottomSheetItem.current
 
     Scaffold {
@@ -34,7 +34,7 @@ fun AddTaskPage(
         ) {
             OutlinedTextField(
                 value = title,
-                onValueChange = {  },
+                onValueChange = { title = it },
                 label = { Text(stringResource(id = R.string.add_page_input_title)) }
             )
             OutlinedTextField(
@@ -45,7 +45,7 @@ fun AddTaskPage(
             Button(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
-                    addTask(Task.newTask(title = title.toString(), description = description))
+                    addTask(Task.newTask(title = title.text, description = description.text))
                     sheetItem(BottomSheetItem.State.Hidden)
                 }
             ) {

@@ -24,6 +24,6 @@ fun TaskCardPreview(
     @PreviewParameter(PreviewTaskProvider::class) task: Task
 ) {
     TodoyTheme {
-        TaskCard(task = task, { Log.d("a", "a")})
+        TaskCard(task = task) { Log.d("a", "a") }
     }
 }

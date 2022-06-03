@@ -57,7 +57,7 @@ fun MainPage() {
                     if(tasks.isNotEmpty()) {
                         items(tasks) { task ->
                             TaskCard(task = task, onClick = {
-                                task.isDone = !task.isDone
+                                viewModel.updateTask(task.copy(isDone = !task.isDone))
                             })
                         }
                     } else {

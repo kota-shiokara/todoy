@@ -49,6 +49,17 @@ class MainPageViewModel @Inject constructor(
         }
     }
 
+    fun updateTask(item: Task) {
+        viewModelScope.launch {
+            try {
+                taskRepository.updateTask(item)
+            } catch (e: Exception) {
+                _state.value = MainPageState.Error(e)
+            }
+            getTasks()
+        }
+    }
+
     fun deleteTask(id: Int) {
         viewModelScope.launch {
             taskRepository.deleteTask(id)
