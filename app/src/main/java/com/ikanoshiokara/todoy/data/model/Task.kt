@@ -41,7 +41,6 @@ class PreviewTasksProvider: PreviewParameterProvider<List<Task>> {
                 Task(1, "Mock Task", "これはモック用のタスクです。"),
                 Task(2, "アプリ概要の提出", "18:00 〆切"),
                 Task(3, "Go to bed", "Oyasumi"),
-
             )
         )
 }

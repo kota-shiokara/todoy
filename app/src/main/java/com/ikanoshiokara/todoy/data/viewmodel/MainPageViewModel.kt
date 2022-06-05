@@ -84,7 +84,6 @@ sealed class MainPageState {
     object Loading: MainPageState()
     data class Success(val content: List<Task>): MainPageState()
     data class Error(val exception: Exception): MainPageState()
-    data class AddTask(val task: Task): MainPageState()
 }
 
 class PreviewTaskViewModelProvider: PreviewParameterProvider<MainPageViewModel> {
