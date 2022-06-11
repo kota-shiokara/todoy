@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Permission Gradle
+        run: chmod 777 ./gradlew
       - name: Build develop
         run: ./gradlew assembleDebug
       - name: distribute develop
