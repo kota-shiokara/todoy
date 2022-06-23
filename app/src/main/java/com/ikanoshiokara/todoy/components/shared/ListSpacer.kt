@@ -11,9 +11,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ListSpacer() {
-    val spacerColor = if(isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
-    Spacer(modifier = Modifier
+fun ListSpacer(
+    modifier: Modifier = Modifier,
+    spacerColor: Color = if(isSystemInDarkTheme()) Color.LightGray else Color.DarkGray
+) {
+    Spacer(modifier = modifier
         .height(1.dp)
         .background(spacerColor)
         .fillMaxWidth()
