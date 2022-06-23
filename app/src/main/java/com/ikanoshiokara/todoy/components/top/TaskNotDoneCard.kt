@@ -30,40 +30,7 @@ fun TaskNotDoneCard(task: Task, onClick: () -> Unit) {
             bottomAccentHeight +
             paddingVertical
 
-    Box(
-        modifier = Modifier
-            .height(cardHeight)
-            .padding(horizontal = 6.dp, vertical = paddingVertical)
-            .fillMaxSize()
-            .clickable(onClick = onClick)
-    ) {
-        Column(
-            modifier = Modifier
-                .clip(MaterialTheme.shapes.small)
-                .fillMaxSize()
-        ) {
-            Surface(
-                color = MaterialTheme.colors.primaryVariant,
-                modifier = Modifier
-                    .height(bodyHeight)
-                    .fillMaxSize()
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(start = 8.dp)
-                ) {
-                    Text(task.title, fontSize = 35.sp, fontWeight = FontWeight.Bold,)
-                    Text(task.description, fontSize = 15.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                }
-            }
-            Surface(
-                color = MaterialTheme.colors.primary,
-                modifier = Modifier
-                    .height(bottomAccentHeight)
-                    .fillMaxSize()
-            ){}
-        }
-    }
+
 
 }
 
