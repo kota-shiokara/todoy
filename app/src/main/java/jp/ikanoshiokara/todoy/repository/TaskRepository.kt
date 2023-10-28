@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.data.repository
+package jp.ikanoshiokara.todoy.repository
 
 import jp.ikanoshiokara.todoy.data.model.Task
 import jp.ikanoshiokara.todoy.data.model.TaskDao
