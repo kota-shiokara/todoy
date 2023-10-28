@@ -20,15 +20,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Permission Gradle
-        run: chmod 777 ./gradlew
-      - name: Build develop
-        run: ./gradlew assembleDebug
-      - name: distribute develop
-        run: |
-          curl \
-          -H "Authorization: token ${{secrets.DEPLOYGATE_API_KEY}}" \
-          -F "file=@app/build/outputs/apk/debug/app-debug.apk" \
-          -F "message=${{ github.event.head_commit.url }}" \
-          -F "distribution_name=develop" \
-          "https://deploygate.com/api/users/${{secrets.DEPLOYGATE_USER}}/apps"
+      - name: lint
+          run: make lint
