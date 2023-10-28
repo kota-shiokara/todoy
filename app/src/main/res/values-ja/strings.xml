@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Add Page -->
+    <string name="add_page_input_title">タイトル</string>
+    <string name="add_page_input_description">概要</string>
+    <string name="add_page_input_submit_button">登録</string>
+</resources>
