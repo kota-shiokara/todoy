@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("org.jmailen.kotlinter")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -82,6 +83,10 @@ dependencies {
 
     // navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("com.kiwi.navigation-compose.typed:core:0.7.0")
+
+    val serializationVersion = "1.6.0"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
     // hilt
     val daggerHiltVersion = "2.48"

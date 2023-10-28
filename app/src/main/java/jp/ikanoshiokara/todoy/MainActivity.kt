@@ -26,16 +26,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.kiwi.navigationcompose.typed.composable
+import com.kiwi.navigationcompose.typed.createRoutePattern
 import dagger.hilt.android.AndroidEntryPoint
 import jp.ikanoshiokara.todoy.components.pages.BottomSheetContent
 import jp.ikanoshiokara.todoy.components.pages.BottomSheetItem
 import jp.ikanoshiokara.todoy.components.pages.MainPage
-import jp.ikanoshiokara.todoy.components.pages.NavItem
+import jp.ikanoshiokara.todoy.ui.NavItem
 import jp.ikanoshiokara.todoy.components.theme.TodoyTheme
-import jp.ikanoshiokara.todoy.data.model.Task
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ExperimentalSerializationApi
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
     error("No Current NavController")
@@ -51,15 +52,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TodoyTheme {
-                MainContent()
+                App()
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalSerializationApi::class)
 @Composable
-fun MainContent() {
+fun App() {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
 
@@ -101,10 +102,7 @@ fun MainContent() {
                 )
             }
         ) {
-            var tasks by remember { mutableStateOf(mutableListOf<Task>()) }
-            Scaffold(
-                // TODO: ボトムバーとか...いる？
-            ) { paddingValues ->
+            Scaffold { paddingValues ->
                 Box(
                     modifier = Modifier
                         .padding(paddingValues)
@@ -112,9 +110,9 @@ fun MainContent() {
                 ) {
                     NavHost(
                         navController = LocalNavController.current,
-                        startDestination = NavItem.MainPage.name
+                        startDestination = createRoutePattern<NavItem.Home>()
                     ) {
-                        composable(NavItem.MainPage.name) {
+                        composable<NavItem.Home> {
                             MainPage()
                         }
                     }
