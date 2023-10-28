@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import jp.ikanoshiokara.todoy.LocalBottomSheetItem
 import jp.ikanoshiokara.todoy.R
 import jp.ikanoshiokara.todoy.data.model.Task
 
@@ -28,7 +27,6 @@ fun AddTaskPage(
 ) {
     var title by remember { mutableStateOf(TextFieldValue()) }
     var description by remember { mutableStateOf(TextFieldValue()) }
-    val sheetItem = LocalBottomSheetItem.current
 
     Scaffold { paddingValues ->
         Column(
@@ -50,7 +48,6 @@ fun AddTaskPage(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
                     addTask(Task.newTask(title = title.text, description = description.text))
-                    sheetItem(BottomSheetItem.State.Hidden)
                 }
             ) {
                 Text(stringResource(id = R.string.add_page_input_submit_button))
