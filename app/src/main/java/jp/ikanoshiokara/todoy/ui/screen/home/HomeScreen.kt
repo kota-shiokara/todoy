@@ -25,8 +25,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import jp.ikanoshiokara.todoy.data.model.Task
 import jp.ikanoshiokara.todoy.ui.screen.AddTaskPage
+import jp.ikanoshiokara.todoy.ui.theme.TodoyTheme
 import jp.ikanoshiokara.todoy.ui.util.LoadingCircle
 import jp.ikanoshiokara.todoy.ui.util.TodoyAppBar
 
@@ -35,8 +38,27 @@ import jp.ikanoshiokara.todoy.ui.util.TodoyAppBar
 fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
-    var isShowBottomSheet by remember { mutableStateOf(false) }
+    val uiState: HomeScreenState by viewModel.state.collectAsState()
 
+    HomeContent(
+        uiState = uiState,
+        updateTask = { task ->
+            viewModel.updateTask(task)
+        },
+        addTask = { task ->
+            viewModel.addTask(task)
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeContent(
+    uiState: HomeScreenState,
+    updateTask: (Task) -> Unit = {},
+    addTask: (Task) -> Unit = {}
+) {
+    var isShowBottomSheet by remember { mutableStateOf(false) }
     Scaffold(
         topBar = { TodoyAppBar() },
         floatingActionButton = {
@@ -49,8 +71,6 @@ fun HomeScreen(
             }
         }
     ) { paddingValues ->
-        val uiState: HomeScreenState by viewModel.state.collectAsState()
-
         when {
             uiState.loading -> {
                 LoadingCircle()
@@ -58,8 +78,7 @@ fun HomeScreen(
             uiState.error != null -> {
                 val errorMessage = uiState.error
                 var openDialog by remember { mutableStateOf(true) }
-                errorMessage?.printStackTrace()
-                Log.d("MainPage", "$errorMessage")
+                errorMessage.printStackTrace()
 
                 if (openDialog) {
                     AlertDialog(
@@ -68,7 +87,7 @@ fun HomeScreen(
                             Text("Error")
                         },
                         text = {
-                            Text(text = errorMessage.toString())
+                            errorMessage.message?.let { Text(text = it) }
                         },
                         confirmButton = {
                             TextButton(
@@ -90,9 +109,12 @@ fun HomeScreen(
                             .padding(paddingValues)
                     ) {
                         items(uiState.tasks) { task ->
-                            TaskCard(task = task, onClick = {
-                                viewModel.updateTask(task.copy(isDone = !task.isDone))
-                            })
+                            TaskCard(
+                                task = task,
+                                onClick = { task ->
+                                    updateTask(task)
+                                }
+                            )
                         }
                     }
                 } else {
@@ -115,7 +137,7 @@ fun HomeScreen(
                     ) {
                         AddTaskPage(
                             addTask = { task ->
-                                viewModel.addTask(task)
+                                addTask(task)
                                 isShowBottomSheet = false
                             }
                         )
@@ -123,5 +145,48 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    TodoyTheme {
+        HomeContent(
+            uiState = HomeScreenState(
+                tasks = (1..10).map {
+                    Task(
+                        id = it,
+                        title = "Mock",
+                        description = "description".repeat(it),
+                        isDone = it == 2
+                    )
+                }
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreen_NotTaskPreview() {
+    TodoyTheme {
+        HomeContent(
+            uiState = HomeScreenState(
+                tasks = listOf()
+            )
+        )
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreen_ErrorPreview() {
+    TodoyTheme {
+        HomeContent(
+            uiState = HomeScreenState(
+                error = Throwable("Mock Error")
+            )
+        )
     }
 }

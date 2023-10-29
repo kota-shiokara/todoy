@@ -47,7 +47,7 @@ fun AddTaskPage(
             Button(
                 modifier = Modifier.padding(10.dp),
                 onClick = {
-                    addTask(Task.newTask(title = title.text, description = description.text))
+                    addTask(Task(title = title.text, description = description.text))
                 }
             ) {
                 Text(stringResource(id = R.string.add_page_input_submit_button))
