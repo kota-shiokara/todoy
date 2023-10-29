@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("org.jmailen.kotlinter")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -62,10 +63,11 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation(platform("androidx.compose:compose-bom:2023.09.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material:material")
+    implementation("androidx.compose.material3:material3")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -82,6 +84,10 @@ dependencies {
 
     // navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("com.kiwi.navigation-compose.typed:core:0.7.0")
+
+    val serializationVersion = "1.6.0"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
     // hilt
     val daggerHiltVersion = "2.48"
