@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.ui.screen
+package jp.ikanoshiokara.todoy.ui.screen.addtask
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

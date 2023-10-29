@@ -1,6 +1,5 @@
 package jp.ikanoshiokara.todoy.ui.screen.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import jp.ikanoshiokara.todoy.data.model.Task
-import jp.ikanoshiokara.todoy.ui.screen.AddTaskPage
+import jp.ikanoshiokara.todoy.ui.screen.addtask.AddTaskPage
 import jp.ikanoshiokara.todoy.ui.theme.TodoyTheme
 import jp.ikanoshiokara.todoy.ui.util.LoadingCircle
 import jp.ikanoshiokara.todoy.ui.util.TodoyAppBar
