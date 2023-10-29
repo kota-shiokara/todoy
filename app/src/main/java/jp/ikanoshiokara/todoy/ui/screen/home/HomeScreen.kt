@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.components.pages
+package jp.ikanoshiokara.todoy.ui.screen.home
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -26,11 +26,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import jp.ikanoshiokara.todoy.components.shared.LoadingCircle
-import jp.ikanoshiokara.todoy.components.shared.MainTopBar
-import jp.ikanoshiokara.todoy.components.top.TaskCard
-import jp.ikanoshiokara.todoy.viewmodel.HomeScreenState
-import jp.ikanoshiokara.todoy.viewmodel.HomeScreenViewModel
+import jp.ikanoshiokara.todoy.ui.screen.AddTaskPage
+import jp.ikanoshiokara.todoy.ui.util.LoadingCircle
+import jp.ikanoshiokara.todoy.ui.util.TodoyAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,7 +38,7 @@ fun HomeScreen(
     var isShowBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = { MainTopBar() },
+        topBar = { TodoyAppBar() },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -53,7 +51,7 @@ fun HomeScreen(
     ) { paddingValues ->
         val uiState: HomeScreenState by viewModel.state.collectAsState()
 
-        when  {
+        when {
             uiState.loading -> {
                 LoadingCircle()
             }

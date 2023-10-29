@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.components.pages
+package jp.ikanoshiokara.todoy.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

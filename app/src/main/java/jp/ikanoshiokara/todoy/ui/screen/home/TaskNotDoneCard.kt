@@ -1,13 +1,13 @@
-package jp.ikanoshiokara.todoy.components.top
+package jp.ikanoshiokara.todoy.ui.screen.home
 
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import jp.ikanoshiokara.todoy.components.theme.TodoyTheme
 import jp.ikanoshiokara.todoy.data.model.PreviewTaskProvider
 import jp.ikanoshiokara.todoy.data.model.Task
+import jp.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
 fun TaskNotDoneCard(task: Task, onClick: () -> Unit) {

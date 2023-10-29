@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.components.theme
+package jp.ikanoshiokara.todoy.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -29,11 +29,8 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun TodoyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    // TODO: 一旦ライトテーマに絞って開発
+    val colors = LightColorPalette
 
     MaterialTheme(
         colors = colors,

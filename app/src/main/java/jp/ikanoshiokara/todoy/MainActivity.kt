@@ -17,9 +17,9 @@ import androidx.navigation.compose.rememberNavController
 import com.kiwi.navigationcompose.typed.composable
 import com.kiwi.navigationcompose.typed.createRoutePattern
 import dagger.hilt.android.AndroidEntryPoint
-import jp.ikanoshiokara.todoy.components.pages.HomeScreen
 import jp.ikanoshiokara.todoy.ui.NavItem
-import jp.ikanoshiokara.todoy.components.theme.TodoyTheme
+import jp.ikanoshiokara.todoy.ui.screen.home.HomeScreen
+import jp.ikanoshiokara.todoy.ui.theme.TodoyTheme
 import kotlinx.serialization.ExperimentalSerializationApi
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {

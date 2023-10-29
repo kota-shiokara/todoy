@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.components.shared
+package jp.ikanoshiokara.todoy.ui.util
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import jp.ikanoshiokara.todoy.R
-import jp.ikanoshiokara.todoy.components.theme.TodoyTheme
+import jp.ikanoshiokara.todoy.ui.theme.TodoyTheme
 
 @Composable
-fun MainTopBar(
+fun TodoyAppBar(
     title: String = stringResource(id = R.string.app_name)
 ) {
     TopAppBar(
@@ -25,6 +25,6 @@ fun MainTopBar(
 @Composable
 fun PreviewMainTopBar() {
     TodoyTheme {
-        MainTopBar()
+        TodoyAppBar()
     }
 }

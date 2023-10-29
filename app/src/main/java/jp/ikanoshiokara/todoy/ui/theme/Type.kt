@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.components.theme
+package jp.ikanoshiokara.todoy.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

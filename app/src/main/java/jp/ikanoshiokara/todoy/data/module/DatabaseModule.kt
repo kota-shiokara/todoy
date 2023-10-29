@@ -1,4 +1,4 @@
-package jp.ikanoshiokara.todoy.module
+package jp.ikanoshiokara.todoy.data.module
 
 import android.content.Context
 import androidx.room.Room
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TaskModule {
+object DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(

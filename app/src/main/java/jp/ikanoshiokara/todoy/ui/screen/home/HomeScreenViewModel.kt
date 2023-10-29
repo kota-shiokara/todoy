@@ -1,10 +1,10 @@
-package jp.ikanoshiokara.todoy.viewmodel
+package jp.ikanoshiokara.todoy.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jp.ikanoshiokara.todoy.data.model.Task
-import jp.ikanoshiokara.todoy.repository.TaskRepository
+import jp.ikanoshiokara.todoy.data.repository.TaskRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
