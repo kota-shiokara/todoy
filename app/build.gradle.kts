@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("org.jmailen.kotlinter")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.starter.easylauncher")
 }
 
 android {
@@ -27,7 +28,6 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
-            resValue("string", "app_name", "todoy(dev)")
         }
         release {
             isMinifyEnabled = false
@@ -35,7 +35,6 @@ android {
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
             )
-            resValue("string", "app_name", "todoy")
         }
     }
     compileOptions {
@@ -54,6 +53,14 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+easylauncher {
+    buildTypes {
+        register("debug") {
+            setFilters(chromeLike())
         }
     }
 }

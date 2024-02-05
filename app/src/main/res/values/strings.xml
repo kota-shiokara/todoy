@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">todoy</string>
 
     <!-- Add Page -->
     <string name="add_page_input_title">Title</string>
