@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">todoy</string>
+    <string name="home_input_placeholder">New task</string>
+    <string name="home_add">Add</string>
+    <string name="home_delete">Delete</string>
+    <string name="home_empty">No tasks</string>
+</resources>
