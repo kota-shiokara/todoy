@@ -69,10 +69,17 @@ Web でも動くよう、**DAO は `suspend` 関数か `Flow` を返す形での
 
 よく使うタスクは `Makefile` にもまとめてある (`make lint` / `make test` / `make web` など)。
 
-## 既知の課題
+## Web 版の日本語フォント
 
-- Web 版で日本語の一部の文字が豆腐 (□) になることがある。Compose for Web は OS のフォントを使えないため、
-  日本語フォント (Noto Sans JP など) をリソースとして同梱する必要がある。
+Compose for Web は OS のフォントを使えないため、Web 版にだけ
+[Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP) (Regular / Bold, v2.004, 未改変) を同梱している。
+`composeApp/src/wasmJsMain/kotlin/.../Main.kt` でフォールバックフォントとして登録しているので、
+欧文は既定のフォント、日本語だけ Noto Sans JP で描画される。
+
+- 置き場所: `composeApp/src/wasmJsMain/composeResources/font/`
+- 1 ウェイトあたり約 5.7MB あり、Web 版の初回表示はその分遅くなる。必要になったらサブセット化を検討する
+  (サブセット化は OFL 上の「改変」にあたるため、名前に予約名 "Source" を含めないこと)。
+- Android / iOS / Desktop は端末のフォントで表示できるので同梱していない。
 
 ## 開発ルール
 
@@ -90,4 +97,7 @@ Web でも動くよう、**DAO は `suspend` 関数か `Flow` を返す形での
 
 ## ライセンス
 
-[MIT](LICENSE)
+アプリのソースコードは [MIT](LICENSE)。
+
+同梱しているフォント Noto Sans JP は SIL Open Font License 1.1 で配布されている
+([ライセンス全文](composeApp/src/wasmJsMain/resources/licenses/NotoSansJP-OFL.txt)。Web 版の配布物にも `licenses/` として含まれる)。
