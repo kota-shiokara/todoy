@@ -1,0 +1,40 @@
+# XcodeGen (https://github.com/yonaskolb/XcodeGen) で Xcode プロジェクトを生成する。
+#   brew install xcodegen
+#   cd iosApp && xcodegen generate && open iosApp.xcodeproj
+name: iosApp
+options:
+  bundleIdPrefix: jp.ikanoshiokara
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  iosApp:
+    type: application
+    platform: iOS
+    sources:
+      - iosApp
+    info:
+      path: iosApp/Info.plist
+      properties:
+        CFBundleDisplayName: todoy
+        UILaunchScreen: {}
+        CADisableMinimumFrameDurationOnPhone: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: jp.ikanoshiokara.todoy
+        FRAMEWORK_SEARCH_PATHS: "$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)"
+        OTHER_LDFLAGS: "$(inherited) -framework ComposeApp"
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    preBuildScripts:
+      - name: Compile Kotlin Framework
+        basedOnDependencyAnalysis: false
+        script: |
+          if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+            echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
+            exit 0
+          fi
+          cd "$SRCROOT/.."
+          ./gradlew :composeApp:embedAndSignAppleFrameworkForXcode
